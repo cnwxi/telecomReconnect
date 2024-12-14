@@ -33,7 +33,7 @@ def reconnect():
     pyautogui.click()
     sleep(3)
     config=get_config()
-    if config.get("push")=="true":
+    if config.get("push"):
         qxwx_push(config.get("push_config"))
 
 
