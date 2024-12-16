@@ -33,19 +33,32 @@ def click_press():
     pyautogui.moveTo(1110, 255)
     sleep(3)
     pyautogui.click()
+    # 留空时间，等待网络连接
+    sleep(5)
 
+
+def countdown(seconds):
+    while seconds:
+        mins, secs = divmod(seconds, 60)
+        timeformat = '{:02d}:{:02d}'.format(mins, secs)
+        if not is_network_available():
+            return False
+        print(timeformat, end='\r')  # 使用 '\r' 来覆盖同一行的内容
+        sleep(1)
+        seconds -= 1
+    print("Time's up!")
+    return True
 
 def reconnect():
-    init_network_flag = False
-    while not init_network_flag:
+    network_flag = False
+    while not network_flag:
         # reconnect
         click_press()
         # wait 60s
-        print("wait 60sec.")
-        sleep(60)
+        print("wait 60sec and check network")
+        network_flag = countdown(60)
         # check network
-        init_network_flag = is_network_available()
-        if init_network_flag:
+        if network_flag:
             config = get_config()
             if config.get("push"):
                 qxwx_push(config.get("push_config"))
