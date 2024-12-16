@@ -40,14 +40,17 @@ def reconnect():
     while not init_network_flag:
         # reconnect
         click_press()
-        # wait 120s
-        sleep(120)
+        # wait 60s
+        print("wait 60sec.")
+        sleep(60)
         # check network
         init_network_flag = is_network_available()
         if init_network_flag:
             config = get_config()
             if config.get("push"):
                 qxwx_push(config.get("push_config"))
+        else:
+            print('network error.')
 
 
 if __name__ == "__main__":
