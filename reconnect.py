@@ -34,7 +34,7 @@ def click_press():
     sleep(3)
     pyautogui.click()
     # 留空时间，等待网络连接
-    sleep(5)
+    sleep(3)
 
 
 def countdown(seconds):
@@ -54,9 +54,9 @@ def reconnect():
     while not network_flag:
         # reconnect
         click_press()
-        # wait 60s
-        print("wait 60sec and check network")
-        network_flag = countdown(60)
+        # wait 300s
+        print("wait 300sec and check network")
+        network_flag = countdown(300)
         # check network
         if network_flag:
             config = get_config()
