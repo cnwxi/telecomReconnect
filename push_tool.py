@@ -2,6 +2,13 @@ import requests
 import json
 
 
+def is_network_available(url='https://www.baidu.com', timeout=5):
+    try:
+        response = requests.get(url, timeout=timeout)
+        return response.status_code == 200
+    except requests.ConnectionError:
+        return False
+
 def get_config():
     with open("./config.json", "r", encoding="utf-8") as f:
         config = json.loads(f.read())
@@ -23,7 +30,7 @@ def qxwx_push(config):
         "agentid": int(qywx_agentid),
         "msgtype": "text",
         "text": {
-            "content": f"电信校园网自动登录\n",
+            "content": f"Telecom Reconnect Done\n",
         },
     }
     res = requests.post(
@@ -38,8 +45,8 @@ def qxwx_push(config):
 
 
 if __name__ == "__main__":
-    config = get_config()
-    print(config)
-    if config.get("push"):
-        qxwx_push(config.get("push_config"))
-    
+    # config = get_config()
+    # print(config)
+    # if config.get("push"):
+    #     qxwx_push(config.get("push_config"))
+    print(is_network_available())

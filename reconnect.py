@@ -1,11 +1,14 @@
+# -*- coding: utf-8 -*-
+
 from time import sleep
 import pyautogui
-from push_tool import get_config, qxwx_push
+from push_tool import get_config, qxwx_push, is_network_available
 
 pyautogui.FAILSAFE = False
 
 
-def reconnect():
+def click_press():
+    pyautogui.click(1910, 10, 2)
     pyautogui.click(1910, 10, 2)
     print("start reconnect mission")
     sleep(3)
@@ -31,10 +34,21 @@ def reconnect():
     pyautogui.moveTo(1110, 255)
     sleep(3)
     pyautogui.click()
-    sleep(3)
-    config=get_config()
-    if config.get("push"):
-        qxwx_push(config.get("push_config"))
+
+
+def reconnect():
+    init_network_flag = False
+    while not init_network_flag:
+        # reconnect
+        click_press()
+        # wait 120s
+        sleep(120)
+        # check network
+        init_network_flag = is_network_available()
+        if init_network_flag:
+            config = get_config()
+            if config.get("push"):
+                qxwx_push(config.get("push_config"))
 
 
 if __name__ == "__main__":
