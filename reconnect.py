@@ -12,14 +12,13 @@ def click_press():
     pyautogui.click(1910, 10, 2)
     print("start reconnect mission")
     sleep(3)
-    pyautogui.press("win")
-    # pyautogui.moveTo()
+    # pyautogui.press("win")
     # 工具
-    pyautogui.moveTo(720, 640)
-    sleep(1)
-    pyautogui.click()
+    # pyautogui.moveTo(720, 640)
+    # sleep(1)
+    # pyautogui.click()
     # 天翼校园
-    pyautogui.moveTo(815, 615)
+    pyautogui.moveTo(1655, 1055)
     sleep(1)
     pyautogui.click()
     # 断开
