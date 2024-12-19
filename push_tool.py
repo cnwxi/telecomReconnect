@@ -40,8 +40,10 @@ def qxwx_push(config):
     res = res.json()
     if res.get("errcode") == 0:
         print("企业微信应用消息推送成功")
+        return True
     else:
         print("企业微信应用消息推送失败")
+        return False
 
 
 if __name__ == "__main__":
