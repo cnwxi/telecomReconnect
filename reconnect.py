@@ -3,14 +3,13 @@
 from time import sleep
 import pyautogui
 from push_tool import get_config, qxwx_push, is_network_available
-
 pyautogui.FAILSAFE = False
 
 
 def awake_windows():
     pyautogui.click(1910, 10, 2)
     sleep(2)
-    pyautogui.click(1910, 10, 2)
+    pyautogui.click(0, 10, 2)
     sleep(2)
 
 
@@ -52,7 +51,7 @@ def countdown(seconds):
 def reconnect():
     print("Start reconnect.")
     network_flag = False
-    wait_time = 180
+    wait_time = 60
     while not network_flag:
         # reconnect
         reconnect_telecom()
@@ -66,15 +65,20 @@ def reconnect():
                 push_flag=False
                 push_times = 0
                 while not push_flag and push_times < 3:
-                    push_flag=qxwx_push(config.get("push_config"))
-                    sleep(1)
+                    try:
+                        push_flag = qxwx_push(config.get("push_config"))
+                    except:
+                        sleep(1)
                     push_times += 1
         else:
             print("\nNetwork error.Reconnecting...")
 
-
-if __name__ == "__main__":
+def all_run():
     awake_windows()
     open_telecom()
     reconnect()
     close_telecom()
+
+if __name__ == "__main__":
+    awake_windows()
+    all_run()
