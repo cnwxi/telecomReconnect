@@ -15,7 +15,7 @@ def get_config():
     return config
 
 
-def qxwx_push(config):
+def qxwx_push(config,content):
     print("企业微信应用消息推送开始")
     qywx_corpid = config.get("qywx_corpid")
     qywx_agentid = config.get("qywx_agentid")
@@ -30,7 +30,7 @@ def qxwx_push(config):
         "agentid": int(qywx_agentid),
         "msgtype": "text",
         "text": {
-            "content": f"Telecom Reconnect Done\n",
+            "content": content,
         },
     }
     res = requests.post(

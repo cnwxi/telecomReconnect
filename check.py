@@ -1,6 +1,7 @@
 from push_tool import is_network_available
 from time import sleep
 from reconnect import all_run
+from push_tool import get_config, qxwx_push
 import pyautogui
 pyautogui.FAILSAFE = False
 
@@ -15,6 +16,9 @@ def check():
             sleep(1)
     if network_flag:
         print("Network is available.")
+        push__config = get_config()
+        if push__config.get("push"):
+            qxwx_push(push__config.get("push_config"), "Network is available.")
     else:
         print("Network is not available.")
         all_run()

@@ -66,7 +66,7 @@ def reconnect():
                 push_times = 0
                 while not push_flag and push_times < 3:
                     try:
-                        push_flag = qxwx_push(config.get("push_config"))
+                        push_flag = qxwx_push(config.get("push_config"), "Reconnect successfully!")
                     except:
                         sleep(1)
                     push_times += 1
