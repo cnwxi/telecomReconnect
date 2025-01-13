@@ -9,13 +9,14 @@ def is_network_available(url='https://www.baidu.com', timeout=3):
     except requests.ConnectionError:
         return False
 
+
 def get_config():
     with open("./config.json", "r", encoding="utf-8") as f:
         config = json.loads(f.read())
     return config
 
 
-def qxwx_push(config,content):
+def qxwx_push(config, content):
     print("企业微信应用消息推送开始")
     qywx_corpid = config.get("qywx_corpid")
     qywx_agentid = config.get("qywx_agentid")
@@ -34,7 +35,8 @@ def qxwx_push(config,content):
         },
     }
     res = requests.post(
-        url=f"https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={token}",
+        url=
+        f"https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={token}",
         data=json.dumps(data),
     )
     res = res.json()
