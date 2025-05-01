@@ -2,10 +2,11 @@ import requests
 import json
 
 
-def is_network_available(url='https://www.baidu.com', timeout=3):
+def is_network_available(url='http://connect.rom.miui.com/generate_204', timeout=5):
     try:
         response = requests.get(url, timeout=timeout)
-        return response.status_code == 200
+        # print(response.status_code)
+        return response.status_code == 204
     except requests.ConnectionError:
         return False
 
