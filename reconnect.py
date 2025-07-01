@@ -7,39 +7,37 @@ from push_tool import get_config, qxwx_push, is_network_available, qqmail_push
 pyautogui.FAILSAFE = False
 
 
-def awake_windows():  # 唤醒屏幕
-    pyautogui.click(1910, 10, 2)
+def awake_windows():  # 唤醒屏幕 右上角空白位置 1080p屏幕 具体位置可使用mouse_listen.py脚本获取
+    pyautogui.click(1910, 10, 2) # mouse_listen.py
     sleep(2)
-    pyautogui.click(0, 10, 2)
-    sleep(2)
+    pyautogui.click(1910, 10, 2) # mouse_listen.py
+    sleep(3)
 
 
 def open_telecom():  # 打开电信宽带登录界面
-    pyautogui.click(1736, 240)
-    sleep(1)
-    pyautogui.click(1673, 1055)
+    pyautogui.click(1673, 1055) # mouse_listen.py
     sleep(1)
 
 
 def reconnect_telecom():  # 重连电信宽带
     # 断开
-    pyautogui.click(960, 600)
+    pyautogui.click(960, 600) # mouse_listen.py
     sleep(10)
     # 登录
-    pyautogui.click(960, 555)
+    pyautogui.click(960, 555) # mouse_listen.py
     sleep(10)
-    pyautogui.click(1910, 10)  # 移开鼠标进入下一事件
+    pyautogui.click(1910, 10) # mouse_listen.py 移开鼠标进入下一事件
 
 
 def close_telecom():  # 关闭电信宽带登录界面
-    pyautogui.click(1110, 255)
+    pyautogui.click(1110, 255) # mouse_listen.py
     print("Reconnect done!")
     sleep(1)
 
 
 def countdown(seconds):  # 倒计时函数，检测网络是否可用
     while seconds:
-        pyautogui.click(seconds % 2 * 1910, 10)  # 防止屏保
+        pyautogui.click(1910, 10)   # mouse_listen.py 防止屏保 
         mins, secs = divmod(seconds, 60)
         timeformat = "Checking network, please wait... {:02d}:{:02d}".format(mins, secs)
         if not is_network_available():
