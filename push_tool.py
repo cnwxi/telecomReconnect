@@ -48,6 +48,26 @@ def qxwx_push(config, content):
         print("企业微信应用消息推送失败")
         return False
 
+def qqmail_push(config, content):
+    print("QQ邮箱推送开始")
+    qqmail_user = config.get("qqmail_user")
+    qqmail_password = config.get("qqmail_password")
+    qqmail_to = qqmail_user  # 默认发送到自己
+    
+    msg = MIMEText(f"{content}", 'plain', 'utf-8')
+    msg['Subject'] = Header(f'网络检测/重连信息推送', 'utf-8')
+    msg['From'] = qqmail_user
+    msg['To'] = qqmail_to
+
+    try:
+        server = smtplib.SMTP_SSL('smtp.qq.com', 465)
+        server.login(qqmail_user, qqmail_password)
+        server.sendmail(qqmail_user, qqmail_to, msg.as_string())
+        print("QQ邮箱推送成功")
+    except Exception as e:
+        print(f"QQ邮箱推送失败: {e}")
+    finally:
+        server.quit()
 
 if __name__ == "__main__":
     # config = get_config()
