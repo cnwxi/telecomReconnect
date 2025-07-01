@@ -53,8 +53,10 @@ def reconnect():  # 重连操作
     print("Start reconnect.")
     network_flag = False
     wait_time = 60
-    while not network_flag:  # 网络不可用，重复循环
+    reconnect_times = 0  # 重连次数
+    while not network_flag and reconnect_times < 3:  # 网络不可用，最多重复循环3次
         # reconnect
+        reconnect_times += 1
         reconnect_telecom()  # 重连电信宽带
         # wait for check network
         print(f"Wait {wait_time}sec and check network")
