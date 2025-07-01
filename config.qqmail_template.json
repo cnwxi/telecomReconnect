@@ -1,0 +1,8 @@
+{
+    "push": true,
+    "push_config": {
+        "type": "qqmail",
+        "qqmail_user": "qq@qq.com",
+        "qqmail_password": "smtp密码"
+    }
+}
